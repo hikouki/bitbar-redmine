@@ -31,12 +31,13 @@ if res.code == '200'
   result = JSON.parse(res.body)
 
   projects = Hash.new { | h, k | h[k] = [] }
+  issues = result['issues']
 
-  result['issues'].each do | v |
+  issues.each do | v |
     projects[v['project']['id']].push(v)
   end
 
-  puts "🐈 #{result.count}"
+  puts "🐈 #{issues.count}"
   puts "---"
   puts "Redmine | color=black"
   puts "---"
