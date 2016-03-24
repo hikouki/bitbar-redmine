@@ -39,14 +39,14 @@ if res.code == '200'
 
   puts "🐈 #{issues.count}"
   puts "---"
-  puts "Redmine | color=black"
+  puts "Redmine | color=black href=#{redmine_url}"
   puts "---"
 
   projects.each do | k, v |
     project_name = v.first['project']['name']
     puts "#{project_name}: #{v.count}"
     v.each do | v |
-      puts "[#{v['status']['name']}] #{v['subject']} | color=black"
+      puts "[#{v['status']['name']}] #{v['subject']} | color=black href=#{redmine_url}/issues/#{v['id']}"
     end
     puts "---"
   end
