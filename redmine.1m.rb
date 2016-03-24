@@ -29,21 +29,32 @@ res = https.start {
 
 if res.code == '200'
   result = JSON.parse(res.body, symbolize_names: true)
-
-  projects = Hash.new { |h, k| h[k] = {issues_count: 0, issues: Hash.new { |h, k| h[k] = [] }} }
   issues = result[:issues]
+
+  projects = Hash.new do |h, k|
+    h[k] = {
+      issues_count: 0,
+      trackers: Hash.new do |h, k|
+        h[k] = {
+          name: "tracker name.",
+          issues: Hash.new {|h,k| h[k] = []}
+        }
+      end
+    }
+  end
 
   issues.each do | v |
     project_id   = v[:project][:id]
     project_name = v[:project][:name]
     status_id    = v[:status][:id]
+    tracker_id   = v[:tracker][:id]
+    tracker_name = v[:tracker][:name]
     projects[project_id][:issues_count] += 1
     projects[project_id][:id] = project_id
     projects[project_id][:name] = project_name
-    projects[project_id][:issues][status_id].push(v)
+    projects[project_id][:trackers][tracker_id][:name] = tracker_name
+    projects[project_id][:trackers][tracker_id][:issues][status_id].push(v)
   end
-
-  projects.sort
 
   puts "🐈 #{issues.count}"
   puts "---"
@@ -51,12 +62,15 @@ if res.code == '200'
   puts "---"
 
   projects.each do | k, project |
-    puts "#{project[:name]}: #{project[:issues_count]}"
-    project[:issues].each do | k, status_issues |
-      puts "[#{status_issues.first[:status][:name]}] | color=#58BE89"
-      status_issues.each do | issue |
-        prefix = status_issues.last == issue ? "└" : "├"
-        puts "#{prefix} ##{issue[:id]} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]}"
+    puts "#{project[:name]}: #{project[:issues_count]} | size=11"
+    project[:trackers].each do | k, tracker |
+      puts "➠ #{tracker[:name]} | color=#33BFDB size=11"
+      tracker[:issues].each do | k, status |
+        puts "[#{status.first[:status][:name]}] | color=#58BE89 size=11"
+        status.each do | issue |
+          prefix = status.last == issue ? "└" : "├"
+          puts "##{issue[:id]} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]} size=11"
+        end
       end
     end
     puts "---"
