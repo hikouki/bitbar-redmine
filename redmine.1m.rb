@@ -51,14 +51,14 @@ if res.code == '200'
   puts "---"
 
   projects.each do | k, project |
-      puts "#{project[:name]}: #{project[:issues_count]}"
-      project[:issues].each do | k, status_issues |
-        puts "[#{status_issues.first[:status][:name]}]"
-        status_issues.each do | issue |
-          prefix = status_issues.last == issue ? "└" : "├"
-          puts "#{prefix} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]}"
-        end
+    puts "#{project[:name]}: #{project[:issues_count]}"
+    project[:issues].each do | k, status_issues |
+      puts "[#{status_issues.first[:status][:name]}] | color=#58BE89"
+      status_issues.each do | issue |
+        prefix = status_issues.last == issue ? "└" : "├"
+        puts "#{prefix} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]}"
       end
+    end
     puts "---"
   end
 
