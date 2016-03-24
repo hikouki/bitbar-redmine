@@ -15,8 +15,12 @@ require 'uri'
 require 'json'
 
 # a6140cbf6e84a0bAffb0cX49138fc5687310b518
+#   or
+# launchctl setenv REDMINE_ACCESS_TOKEN a6140cbf6e84a0bAffb0cX49138fc5687310b518
 token = ENV["REDMINE_ACCESS_TOKEN"] || ''
 # https://redmine.xxxx.com
+#   or
+# launchctl setenv REDMINE_URL https://redmine.xxxx.com
 redmine_url = ENV["REDMINE_URL"] || ''
 
 uri = URI.parse("#{redmine_url}/issues.json?key=#{token}&status_id=open&assigned_to_id=me")
