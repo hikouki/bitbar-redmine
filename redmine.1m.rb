@@ -28,26 +28,37 @@ res = https.start {
 }
 
 if res.code == '200'
-  result = JSON.parse(res.body)
+  result = JSON.parse(res.body, symbolize_names: true)
 
-  projects = Hash.new { | h, k | h[k] = [] }
-  issues = result['issues']
+  projects = Hash.new { |h, k| h[k] = {issues_count: 0, issues: Hash.new { |h, k| h[k] = [] }} }
+  issues = result[:issues]
 
   issues.each do | v |
-    projects[v['project']['id']].push(v)
+    project_id   = v[:project][:id]
+    project_name = v[:project][:name]
+    status_id    = v[:status][:id]
+    projects[project_id][:issues_count] += 1
+    projects[project_id][:id] = project_id
+    projects[project_id][:name] = project_name
+    projects[project_id][:issues][status_id].push(v)
   end
+
+  projects.sort
 
   puts "🐈 #{issues.count}"
   puts "---"
   puts "Redmine | color=black href=#{redmine_url}"
   puts "---"
 
-  projects.each do | k, v |
-    project_name = v.first['project']['name']
-    puts "#{project_name}: #{v.count}"
-    v.each do | v |
-      puts "[#{v['status']['name']}] #{v['subject']} | color=black href=#{redmine_url}/issues/#{v['id']}"
-    end
+  projects.each do | k, project |
+      puts "#{project[:name]}: #{project[:issues_count]}"
+      project[:issues].each do | k, status_issues |
+        puts "[#{status_issues.first[:status][:name]}]"
+        status_issues.each do | issue |
+          prefix = status_issues.last == issue ? "└" : "├"
+          puts "#{prefix} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]}"
+        end
+      end
     puts "---"
   end
 
