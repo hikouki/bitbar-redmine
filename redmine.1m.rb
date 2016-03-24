@@ -21,13 +21,15 @@ redmine_url = ENV["REDMINE_URL"] || ''
 
 uri = URI.parse("#{redmine_url}/issues.json?key=#{token}&status_id=open&assigned_to_id=me")
 
-https = Net::HTTP.new(uri.host, uri.port)
-https.use_ssl = true
-res = https.start {
-  https.get(uri.request_uri)
-}
+begin
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true if(uri.scheme == 'https')
+  res = http.start {
+    http.get(uri.request_uri)
+  }
 
-if res.code == '200'
+  raise "error #{res.code} #{res.message}" if res.code != '200'
+
   result = JSON.parse(res.body, symbolize_names: true)
   issues = result[:issues]
 
@@ -75,7 +77,8 @@ if res.code == '200'
     end
     puts "---"
   end
-
-else
-  puts "error #{res.code} #{res.message}"
+rescue
+  puts "🐈 !"
+  puts "---"
+  puts "Exception: #{$!}"
 end
