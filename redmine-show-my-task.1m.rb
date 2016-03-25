@@ -2,11 +2,11 @@
 # coding: utf-8
 
 # <bitbar.title>Redmine</bitbar.title>
-# <bitbar.version>v0.1.0</bitbar.version>
+# <bitbar.version>v1.0.0</bitbar.version>
 # <bitbar.author>hikouki</bitbar.author>
 # <bitbar.author.github>hikouki</bitbar.author.github>
-# <bitbar.desc>Show Redmine open ticket for mine repos</bitbar.desc>
-# <bitbar.image>http://~</bitbar.image>
+# <bitbar.desc>Show Redmine open ticket for mine</bitbar.desc>
+# <bitbar.image>https://raw.githubusercontent.com/hikouki/bitbar-redmine/master/preview.png</bitbar.image>
 # <bitbar.dependencies>ruby</bitbar.dependencies>
 # <bitbar.abouturl>https://github.com/hikouki</bitbar.abouturl>
 
