@@ -63,7 +63,7 @@ begin
   end
 
   issue_total_count = result[:total_count] > 99 ? '99+' : result[:total_count]
-  puts issues.empty? ? "✦ | color=#7d7d7d" : "✦ #{issue_total_count} | color=#EE6557"
+  puts issues.empty? ? "✦ | color=#7d7d7d" : "✦ #{issue_total_count}"
   puts "---"
   puts "Redmine | color=black href=#{redmine_url}"
   puts "---"
