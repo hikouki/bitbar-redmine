@@ -1,4 +1,7 @@
 # bitbar-redmine
+
+[![Add to BitBar](https://raw.githubusercontent.com/hikouki/bitbar-redmine/master/add-to-bitbar.png)](bitbar://openPlugin?title=Redmine%20Show%20My%20Task&src=https://raw.githubusercontent.com/hikouki/bitbar-redmine/master/redmine-show-my-task.1m.rb")
+
 bitbar plugin for redmine.
 
 ![preview](https://raw.githubusercontent.com/hikouki/bitbar-redmine/master/preview.png)
