@@ -68,14 +68,14 @@ begin
   puts "---"
 
   projects.each do | k, project |
-    puts "#{project[:name]}: #{project[:issues_count]} | size=11"
+    puts "#{project[:name]}: #{project[:issues_count]}"
     project[:trackers].each do | k, tracker |
-      puts "➠ #{tracker[:name]} | color=#33BFDB size=11"
+      puts "➠ #{tracker[:name]} | color=#33BFDB"
       tracker[:issues].each do | k, status |
-        puts "[#{status.first[:status][:name]}] | color=#58BE89 size=11"
+        puts "[#{status.first[:status][:name]}] | color=#58BE89"
         status.each do | issue |
           prefix = status.last == issue ? "└" : "├"
-          puts "##{issue[:id]} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]} size=11"
+          puts "##{issue[:id]} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]}"
         end
       end
     end
