@@ -1,8 +1,16 @@
 # bitbar-redmine
 
-bitbar plugin for redmine.
+Bitbar plugin for redmine.
+
+Show Redmine open ticket for mine.
 
 ![preview](https://raw.githubusercontent.com/hikouki/bitbar-redmine/master/preview.png)
+
+# Contributing
+
+You can write in English or Japanese for pull-request and issue.
+
+After pull-request merged, I merge it into matryer/bitbar-plugins.
 
 # License
 
