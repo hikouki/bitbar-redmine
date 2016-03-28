@@ -17,13 +17,13 @@ require 'json'
 # a6140cbf6e84a0bAffb0cX49138fc5687310b518
 #   or
 # launchctl setenv REDMINE_ACCESS_TOKEN a6140cbf6e84a0bAffb0cX49138fc5687310b518
-token = ENV["REDMINE_ACCESS_TOKEN"] || ''
+TOKEN = ENV["REDMINE_ACCESS_TOKEN"] || ''
 # https://redmine.xxxx.com
 #   or
 # launchctl setenv REDMINE_URL https://redmine.xxxx.com
-redmine_url = ENV["REDMINE_URL"] || ''
+REDMINE_URL = ENV["REDMINE_URL"] || ''
 
-uri = URI.parse("#{redmine_url}/issues.json?key=#{token}&limit=100&status_id=open&assigned_to_id=me")
+uri = URI.parse("#{REDMINE_URL}/issues.json?key=#{TOKEN}&limit=100&status_id=open&assigned_to_id=me")
 
 begin
   res = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme == 'https') do | http |
@@ -67,7 +67,7 @@ begin
   issue_total_count = result[:total_count] > 99 ? '99+' : result[:total_count]
   puts issues.empty? ? "✦ | color=#7d7d7d" : "✦ #{issue_total_count}"
   puts "---"
-  puts "Redmine | color=black href=#{redmine_url}"
+  puts "Redmine | color=black href=#{REDMINE_URL}"
   puts "---"
 
   projects.each do | _, project |
@@ -78,7 +78,7 @@ begin
         puts "[#{status[:name]}] | color=#58BE89 size=11"
         status[:issues].each do | issue |
           prefix = status[:issues].last == issue ? "└" : "├"
-          puts "#{prefix} ##{issue[:id]} #{issue[:subject]} | color=black href=#{redmine_url}/issues/#{issue[:id]} size=11"
+          puts "#{prefix} ##{issue[:id]} #{issue[:subject]} | color=black href=#{REDMINE_URL}/issues/#{issue[:id]} size=11"
         end
       end
     end
