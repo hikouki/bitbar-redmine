@@ -82,8 +82,9 @@ begin
     end
     puts "---"
   end
-rescue
+rescue => e
   puts "✦ ! | color=#ECB935"
   puts "---"
   puts "Exception: #{$!}"
+  puts e.backtrace
 end
