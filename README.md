@@ -1,5 +1,7 @@
 # bitbar-redmine
 
+[![Build Status](https://travis-ci.org/hikouki/bitbar-redmine.svg?branch=master)](https://travis-ci.org/hikouki/bitbar-redmine)
+
 Bitbar plugin for redmine.
 
 Show Redmine open ticket for mine.
