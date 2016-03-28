@@ -10,7 +10,7 @@ Show Redmine open ticket for mine.
 
 You can write in English or Japanese for pull-request and issue.
 
-After pull-request merged, I merge it into matryer/bitbar-plugins.
+After pull-request merged, I merge it into [matryer/bitbar-plugins](https://github.com/matryer/bitbar-plugins).
 
 # License
 
