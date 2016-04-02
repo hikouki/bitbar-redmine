@@ -8,7 +8,7 @@
 # <bitbar.desc>Show Redmine open ticket for mine</bitbar.desc>
 # <bitbar.image>https://raw.githubusercontent.com/hikouki/bitbar-redmine/master/preview.png</bitbar.image>
 # <bitbar.dependencies>ruby</bitbar.dependencies>
-# <bitbar.abouturl>https://github.com/hikouki</bitbar.abouturl>
+# <bitbar.abouturl>https://github.com/hikouki/bitbar-redmine</bitbar.abouturl>
 
 require 'net/http'
 require 'uri'
