@@ -1,4 +1,7 @@
-#!/usr/local/bin/ruby
+#! /bin/sh
+exec ruby -S -x "$0" "$@"
+#! ruby
+
 # coding: utf-8
 
 # <bitbar.title>Redmine Show My Task</bitbar.title>
